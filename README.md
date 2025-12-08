@@ -34,3 +34,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+The main response structure have 4 keys which are
+1) error_code code to indicate if there was an error
+2) Success always returning true or false if the response is success will returning true otherwise will get false
+3) Message it’s better to return the response message from back-end
+4) data which is the main key and will have the data that should be displayed
