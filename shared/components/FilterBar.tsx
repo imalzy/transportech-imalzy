@@ -19,7 +19,7 @@ const FilterBar = () => {
       <h3 className="text-base">Filter By: </h3>
       {
         filters.map((filter) => (
-          <label className="relative flex items-center gap-2 cursor-pointer">
+          <label key={filter.value} className="relative flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
               name="filterBy"
