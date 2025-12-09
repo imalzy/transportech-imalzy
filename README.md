@@ -45,26 +45,3 @@ pnpm install
 # .env file
 # Replace this with the actual API URL used in the project
 NEXT_PUBLIC_API_URL=https://rickandmortyapi.com/api
-
-# Available Scripts
-In the project directory, you can run:
-
-Script,Description
-npm run dev,Starts the application in development mode with hot-reloading.
-npm run build,Creates an optimized production build of the application.
-npm run start,Starts the Next.js production server. Must be run after npm run build.
-npm run lint,Runs the linter (ESLint) to catch errors and enforce code style.
-
-# Folder Structure
-Directory/File,Description
-app/,"Next.js App Router root, containing pages, layouts, and API routes."
-app/(routes)/,Contains the main pages (page.tsx) and dynamic routes ([id]/page.tsx).
-app/api/,"Custom API routes for handling server-side logic (e.g., /characters)."
-features/,"Contains feature-specific logic, components, state, and types (e.g., characters)."
-layouts/,Common layout components like Header.
-lib/,Utility functions and configurations.
-public/,Static assets like images and SVGs.
-shared/,"Reusable components (FilterBar, Pagination), hooks, and utils used across multiple features."
-store/,"Global state management with Zustand (e.g., theme.store.ts)."
-package.json,Lists project dependencies and scripts.
-tsconfig.json,TypeScript configuration.
