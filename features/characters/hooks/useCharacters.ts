@@ -1,19 +1,21 @@
+// src/features/characters/hooks/useCharacters.ts
 import { useEffect } from "react";
-import { useCharacterStore } from "../store/character.store";
 import { getCharacters } from "../api/character.api";
+import { useCharacterStore } from "../store/character.store";
 
 export const useCharacters = () => {
-  const { setCharacters, setLoading, setError, characters } = useCharacterStore();
+  const { currentPage, setCharacters, setLoading, setError } =
+    useCharacterStore();
 
   useEffect(() => {
-    if (characters.length > 0) return; // avoid refetch if already loaded
-
     const load = async () => {
       try {
         setLoading(true);
-        const data = await getCharacters();
-        setCharacters(data.data || []);
-      } catch {
+        const res = await getCharacters(currentPage);
+
+        setCharacters(res.data || [], res.meta);
+        setError(null);
+      } catch (err) {
         setError("Failed to load characters");
       } finally {
         setLoading(false);
@@ -21,7 +23,7 @@ export const useCharacters = () => {
     };
 
     load();
-  }, []);
+  }, [currentPage]);
 
   return useCharacterStore();
 };

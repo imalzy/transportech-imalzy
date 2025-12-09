@@ -40,7 +40,7 @@ const CharacterCard = ({
     return (
         <div
             className="
-        w-[294px] bg-gray-100 rounded-lg shadow-md overflow-hidden
+       w-full md:w-[294px] bg-gray-100 rounded-lg shadow-md overflow-hidden
         transition-all duration-300 hover:shadow-xl hover:-translate-y-1
         animate-in fade-in zoom-in-50 p-4
       "
