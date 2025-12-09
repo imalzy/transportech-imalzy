@@ -8,6 +8,7 @@ import {
     InfoIcon,
 } from "lucide-react";
 import { useCharacterStore } from "../store/character.store";
+import Link from "next/link";
 
 interface CharacterCardProps {
     id?: number;
@@ -16,6 +17,7 @@ interface CharacterCardProps {
     species?: string;
     origin?: string;
     image?: string;
+    handleClick?: () => void;
 }
 const CharacterCard = ({
     id,
@@ -24,6 +26,7 @@ const CharacterCard = ({
     species,
     origin,
     image,
+    handleClick,
 }: CharacterCardProps) => {
 
     const toggleFavorite = useCharacterStore((s) => s.toggleFavorite);
@@ -36,14 +39,14 @@ const CharacterCard = ({
     return (
         <div
             className="
-       w-full md:w-[294px] bg-gray-100 rounded-lg shadow-md overflow-hidden
+       w-full md:w-[300px] bg-gray-100 rounded-lg shadow-md overflow-hidden
         transition-all duration-300 hover:shadow-xl hover:-translate-y-1
         animate-in fade-in zoom-in-50 p-4
       "
         >
             <div className="w-full h-[200px] relative">
                 <Image
-                    src={image || ""}
+                    src={image || "/empty.png"}
                     alt={name || "character"}
                     fill
                     className="
@@ -103,6 +106,9 @@ const CharacterCard = ({
             text-sm hover:bg-cyan-700 transition active:scale-95
             animate-in fade-in slide-in-from-bottom-2 cursor-pointer
           "
+                    type="button"
+                    name="Button direct into detail character"
+                    onClick={()=>handleClick?.()}
                 >
                     <InfoIcon size={20} color="#fff" />
 

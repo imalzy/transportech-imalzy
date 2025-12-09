@@ -4,6 +4,7 @@ import { Character } from "../types/character.types";
 
 interface CharacterState {
   characters: Character[];
+  character: Character | null;
   favorites: number[];
   meta: { pages: number; count: number } | null;
 
@@ -16,6 +17,7 @@ interface CharacterState {
 
   setPage: (page: number) => void;
   setCharacters: (list: Character[], meta: any) => void;
+  setCharacter: (character: Character) => void;
 
   toggleFavorite: (id: number) => void;
   isFavorite: (id: number) => boolean;
@@ -31,6 +33,7 @@ export const useCharacterStore = create<CharacterState>()(
   persist(
     (set, get) => ({
       characters: [],
+      character: null,
       favorites: [],
       meta: null,
 
@@ -44,7 +47,8 @@ export const useCharacterStore = create<CharacterState>()(
       setPage: (page) => set({ currentPage: page }),
 
       setCharacters: (list, meta) => set({ characters: list, meta }),
-
+      setCharacter: (character) => set({ character }),
+      
       setLoading: (val) => set({ isLoading: val }),
       setError: (msg) => set({ error: msg }),
 

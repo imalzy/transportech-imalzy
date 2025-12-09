@@ -6,10 +6,13 @@ import CharacterCard from "./CharacterCard";
 import { useCharacterStore } from "../store/character.store";
 import { useCharacters } from "../hooks/useCharacters";
 import { Pagination } from "@/shared/components/Pagination";
+import { useRouter } from "next/navigation";
+import { Character } from "../types/character.types";
 
 const CharacterList = () => {
     const { theme, setTheme } = useThemeStore();
-    const { characters, currentPage, meta, setPage, isLoading, error, setStatusFilter, setSearch } = useCharacters();
+    const router = useRouter();
+    const { characters, currentPage, meta, setPage, isLoading, error, setStatusFilter, setSearch, setCharacter } = useCharacters();
 
     const [isDark, setIsDark] = useState(theme === "dark");
 
@@ -22,6 +25,11 @@ const CharacterList = () => {
     const handleSearch = (query: string) => {
         setSearch(query);
         setPage(1);
+    };
+
+    const handleDetail = (character: Character) => {
+        setCharacter(character)
+        router.push(`/${character.id}`);
     };
 
     useEffect(() => {
@@ -54,6 +62,7 @@ const CharacterList = () => {
                                         species={character?.species}
                                         origin={character?.origin?.name}
                                         image={character?.image}
+                                        handleClick={() => handleDetail(character)}
                                     />
                                 ))
                             }
