@@ -1,42 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Transportech-Imalzy
 
-## Getting Started
+A modern web application built with Next.js, TypeScript, and Zustand for state management. This project is a character explorer, likely integrating with an external API (like The Rick and Morty API, based on the structure) to display character and episode information.
 
-First, run the development server:
+## 🌟 Features
 
-```bash
-npm run dev
+* **Next.js App Router:** Utilizes the latest routing conventions for a robust structure.
+* **TypeScript:** Ensures type safety across the entire codebase.
+* **Zustand:** A fast and scalable state management solution (used for `theme.store` and `character.store`).
+* **API Routes:** Custom backend endpoints for character data fetching and serving.
+* **Theming:** Includes a theme-toggle feature, likely using Tailwind CSS.
+* **Modular Structure:** Logic is organized into `app`, `features`, `layouts`, and `shared` directories.
+
+## 🛠️ Tech Stack
+
+* **Framework:** [Next.js](https://nextjs.org/) (v16.0.7)
+* **Language:** [TypeScript](https://www.typescriptlang.org/)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+* **State Management:** [Zustand](https://zustand-bear.github.io/zustand/) (v5.0.9)
+* **HTTP Client:** [Axios](https://axios-http.com/)
+
+## ⚙️ Setup Instructions
+
+Follow these steps to get the project running on your local machine.
+
+### 1. Prerequisites
+
+Make sure you have [Node.js](https://nodejs.org/en) installed (preferably the latest LTS version).
+
+### 2. Clone the Repository
+
+git clone <repository-url>
+cd transportech-imalzy
+
+### 3. Install Dependencies
+
+npm install 
 # or
-yarn dev
+yarn install 
 # or
-pnpm dev
-# or
-bun dev
-```
+pnpm install
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 4. Environment Variables
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# .env file
+# Replace this with the actual API URL used in the project
+NEXT_PUBLIC_API_URL=https://rickandmortyapi.com/api
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Available Scripts
+In the project directory, you can run:
 
-## Learn More
+Script,Description
+npm run dev,Starts the application in development mode with hot-reloading.
+npm run build,Creates an optimized production build of the application.
+npm run start,Starts the Next.js production server. Must be run after npm run build.
+npm run lint,Runs the linter (ESLint) to catch errors and enforce code style.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-The main response structure have 4 keys which are
-1) error_code code to indicate if there was an error
-2) Success always returning true or false if the response is success will returning true otherwise will get false
-3) Message it’s better to return the response message from back-end
-4) data which is the main key and will have the data that should be displayed
+# Folder Structure
+Directory/File,Description
+app/,"Next.js App Router root, containing pages, layouts, and API routes."
+app/(routes)/,Contains the main pages (page.tsx) and dynamic routes ([id]/page.tsx).
+app/api/,"Custom API routes for handling server-side logic (e.g., /characters)."
+features/,"Contains feature-specific logic, components, state, and types (e.g., characters)."
+layouts/,Common layout components like Header.
+lib/,Utility functions and configurations.
+public/,Static assets like images and SVGs.
+shared/,"Reusable components (FilterBar, Pagination), hooks, and utils used across multiple features."
+store/,"Global state management with Zustand (e.g., theme.store.ts)."
+package.json,Lists project dependencies and scripts.
+tsconfig.json,TypeScript configuration.
