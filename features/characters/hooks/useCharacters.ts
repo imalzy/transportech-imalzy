@@ -4,14 +4,14 @@ import { getCharacters } from "../api/character.api";
 import { useCharacterStore } from "../store/character.store";
 
 export const useCharacters = () => {
-  const { currentPage, setCharacters, setLoading, setError } =
+  const { currentPage, searchName, statusFilter, setCharacters, setLoading, setError } =
     useCharacterStore();
 
   useEffect(() => {
     const load = async () => {
       try {
         setLoading(true);
-        const res = await getCharacters(currentPage);
+        const res = await getCharacters(currentPage, searchName, statusFilter);
 
         setCharacters(res.data || [], res.meta);
         setError(null);
@@ -23,7 +23,7 @@ export const useCharacters = () => {
     };
 
     load();
-  }, [currentPage]);
+  }, [currentPage, searchName, statusFilter]);
 
   return useCharacterStore();
 };

@@ -7,7 +7,7 @@ interface SearchBarProps {
 }
 
 export default function SearchBar({
-  placeholder = "Character, episode, location......",
+  placeholder = "Search Name......",
   onSearch,
 }: SearchBarProps) {
   const [query, setQuery] = useState<string>("");
@@ -17,7 +17,6 @@ export default function SearchBar({
     e.preventDefault();
     setPulse(true);
 
-    // remove pulse after animation
     setTimeout(() => setPulse(false), 300);
 
     if (onSearch) onSearch(query);
@@ -48,7 +47,7 @@ export default function SearchBar({
         onChange={handleChange}
       />
 
-      <button type="submit">
+      <button type="submit" className={`${pulse ? "animate-pulse" : ""}`}>
         <SearchIcon size={20} />
       </button>
     </form>

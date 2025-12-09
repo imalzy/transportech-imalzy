@@ -1,21 +1,33 @@
 "use client";
 
-import { CheckIcon, EarthIcon, FilmIcon, SmileIcon } from "lucide-react";
+import { CheckIcon, HeartPulseIcon, HelpCircleIcon, SkullIcon } from "lucide-react";
 import { useState } from "react";
 
-const FilterBar = () => {
+interface FilterBarProps {
+  onFilter?: (query: string) => void;
+}
+
+
+const FilterBar = ({ onFilter }: FilterBarProps) => {
   const [filterBy, SetFilterBy] = useState("all");
 
   const filters = [
     { label: "All", value: "all", icon: CheckIcon },
-    { label: "Characters", value: "characters", icon: SmileIcon },
-    { label: "Locations", value: "locations", icon: EarthIcon },
-    { label: "Episode", value: "episode", icon: FilmIcon },
+    { label: "Alive", value: "alive", icon: HeartPulseIcon },
+    { label: "Dead", value: "dead", icon: SkullIcon },
+    { label: "Unknown", value: "unknown", icon: HelpCircleIcon },
   ];
+
+  const handleFilter = (value: string) => {
+    if (value) {
+      SetFilterBy(value);
+      if (onFilter) onFilter(value);
+    }
+  }
 
 
   return (
-    <div className="flex items-center flex-wrap lg:justify-start justify-center gap-3 select-none">
+    <div className="flex items-center flex-wrap lg:justify-start justify-center gap-3 select-none mt-4 md:mt-1 w-full md:w-auto">
       <h3 className="text-base">Filter By: </h3>
       <div className="flex items-center flex-wrap">
         {
@@ -26,7 +38,7 @@ const FilterBar = () => {
                 name="filterBy"
                 value="light"
                 checked={filterBy === filter.value}
-                onChange={() => SetFilterBy(filter.value)}
+                onChange={() => handleFilter(filter.value)}
                 className="peer hidden"
               />
 

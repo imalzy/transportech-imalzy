@@ -1,7 +1,7 @@
 import FilterBar from "@/shared/components/FilterBar";
 import SearchBar from "@/shared/components/SearchBar";
 import { useThemeStore } from "@/store/theme.store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CharacterCard from "./CharacterCard";
 import { useCharacterStore } from "../store/character.store";
 import { useCharacters } from "../hooks/useCharacters";
@@ -9,13 +9,25 @@ import { Pagination } from "@/shared/components/Pagination";
 
 const CharacterList = () => {
     const { theme, setTheme } = useThemeStore();
-    const { characters, currentPage, meta, setPage, isLoading, error } = useCharacters();
-    
+    const { characters, currentPage, meta, setPage, isLoading, error, setStatusFilter, setSearch } = useCharacters();
+
     const [isDark, setIsDark] = useState(theme === "dark");
 
-    const handleChange = () => {
 
-    }
+    const handleFilter = (value: string) => {
+        setStatusFilter(value === 'all' ? '' : value);
+        setPage(1);
+    };
+
+    const handleSearch = (query: string) => {
+        setSearch(query);
+        setPage(1);
+    };
+
+    useEffect(() => {
+        setSearch("");
+        setStatusFilter("");
+    }, []);
 
     return (
         <section className={`py-4 md:py-6 px-4 md:px-8 pb-0!`}>
@@ -23,8 +35,8 @@ const CharacterList = () => {
 
             <div className="max-w-7xl mx-auto flex flex-col gap-8 lg:max-h-[400px]">
                 <div className="flex justify-between items-center flex-wrap">
-                    <SearchBar />
-                    <FilterBar />
+                    <SearchBar onSearch={handleSearch} />
+                    <FilterBar onFilter={handleFilter} />
                 </div>
 
                 {isLoading && <p className="text-center py-10">Loading...</p>}
@@ -36,13 +48,13 @@ const CharacterList = () => {
                             {
                                 characters && characters.map((character) => (
                                     <CharacterCard key={character.id}
-                                        name={character.name}
-                                        status={character.status}
-                                        species={character.species}
-                                        origin={character.origin?.name}
-                                        image={character.image}
-                                        defaultFavorite
-                                        onFavoriteChange={handleChange} />
+                                        id={character.id}
+                                        name={character?.name}
+                                        status={character?.status}
+                                        species={character?.species}
+                                        origin={character?.origin?.name}
+                                        image={character?.image}
+                                    />
                                 ))
                             }
 

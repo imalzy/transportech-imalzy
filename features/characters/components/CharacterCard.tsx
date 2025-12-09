@@ -7,34 +7,30 @@ import {
     Globe,
     InfoIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { useCharacterStore } from "../store/character.store";
 
 interface CharacterCardProps {
+    id?: number;
     name?: string;
     status?: string;
     species?: string;
     origin?: string;
     image?: string;
-    defaultFavorite?: boolean;
-    onFavoriteChange?: (fav: boolean) => void;
 }
-
 const CharacterCard = ({
-    name = "Rick Sanchez",
-    status = "Vivo",
-    species = "Humano",
-    origin = "Earth (C-137)",
-    image = "/c1.jpg",
-    defaultFavorite = false,
-    onFavoriteChange,
+    id,
+    name,
+    status,
+    species,
+    origin,
+    image,
 }: CharacterCardProps) => {
 
-    const [favorite, setFavorite] = useState(defaultFavorite);
+    const toggleFavorite = useCharacterStore((s) => s.toggleFavorite);
+    const isFavorite = useCharacterStore((s) => s.isFavorite(id || 0));
 
-    const toggleFavorite = () => {
-        const newState = !favorite;
-        setFavorite(newState);
-        onFavoriteChange?.(newState);
+    const handleFavorite = () => {
+        toggleFavorite(id || 0);
     };
 
     return (
@@ -47,8 +43,8 @@ const CharacterCard = ({
         >
             <div className="w-full h-[200px] relative">
                 <Image
-                    src={image}
-                    alt={name}
+                    src={image || ""}
+                    alt={name || "character"}
                     fill
                     className="
               object-cover rounded-xl
@@ -64,10 +60,10 @@ const CharacterCard = ({
                     {name}
                 </h2>
                 <button
-                    onClick={toggleFavorite}
+                    onClick={handleFavorite}
                     className="transition active:scale-90 cursor-pointer"
                 >
-                    {favorite ? (
+                    {isFavorite ? (
                         <Heart
                             className="w-7 h-7 text-cyan-600 animate-in zoom-in-50"
                             fill="#11B0C8"

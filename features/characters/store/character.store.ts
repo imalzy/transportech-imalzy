@@ -11,6 +11,9 @@ interface CharacterState {
   isLoading: boolean;
   error: string | null;
 
+  searchName: string;
+  statusFilter: string;
+
   setPage: (page: number) => void;
   setCharacters: (list: Character[], meta: any) => void;
 
@@ -19,6 +22,9 @@ interface CharacterState {
 
   setLoading: (val: boolean) => void;
   setError: (msg: string | null) => void;
+
+  setSearch: (q: string) => void;
+  setStatusFilter: (status: string) => void;
 }
 
 export const useCharacterStore = create<CharacterState>()(
@@ -31,6 +37,9 @@ export const useCharacterStore = create<CharacterState>()(
       currentPage: 1,
       isLoading: false,
       error: null,
+
+      searchName: "",
+      statusFilter: "",
 
       setPage: (page) => set({ currentPage: page }),
 
@@ -49,6 +58,9 @@ export const useCharacterStore = create<CharacterState>()(
       },
 
       isFavorite: (id) => get().favorites.includes(id),
+
+      setSearch: (q) => set({ searchName: q }),
+      setStatusFilter: (status) => set({ statusFilter: status }),
     }),
     { name: "characters-storage" }
   )
